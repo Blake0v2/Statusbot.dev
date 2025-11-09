@@ -2,383 +2,404 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Status Bot Premium</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Status Bot - Premium</title>
 
-    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Poppins:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
 
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-        }
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
 
-        body {
-            background-color: #202020;
-            color: white;
-            border: 2px solid #4162ff;
-            box-shadow: 0 0 25px rgba(65, 98, 255, 0.3);
-            min-height: 100vh;
-            position: relative;
-            padding-bottom: 120px;
-        }
+    body {
+      background-color: #202020;
+      color: white;
+      border: 2px solid #4162ff;
+      box-shadow: 0 0 25px rgba(65, 98, 255, 0.3);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
 
-        /* NAVBAR (same as main page) */
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 32px 60px;
-        }
+    /* Navbar */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 32px 60px;
+    }
 
-        .nav-left {
-            display: flex;
-            align-items: center;
-            gap: 35px;
-        }
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 35px;
+    }
 
-        .nav-left img {
-            height: 45px;
-            width: 45px;
-            border-radius: 50%;
-        }
+    .nav-left img {
+      height: 45px;
+      width: 45px;
+      border-radius: 50%;
+    }
 
-        .nav-links {
-            display: flex;
-            gap: 35px;
-        }
+    .nav-links {
+      display: flex;
+      gap: 35px;
+    }
 
-        .nav-links a {
-            position: relative;
-            text-decoration: none;
-            color: white;
-            font-weight: 500;
-            font-size: 20px;
-        }
+    .nav-links a {
+      position: relative;
+      text-decoration: none;
+      color: white;
+      font-weight: 500;
+      font-size: 20px;
+    }
 
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            left: 0;
-            bottom: -5px;
-            width: 0%;
-            height: 2px;
-            background-color: #4162ff;
-            transition: width 0.3s ease;
-        }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -5px;
+      width: 0%;
+      height: 2px;
+      background-color: #4162ff;
+      transition: width 0.3s ease;
+    }
 
-        .nav-links a:hover::after {
-            width: 100%;
-        }
+    .nav-links a:hover::after {
+      width: 100%;
+    }
 
-        .dropdown {
-            position: relative;
-            display: inline-block;
-        }
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
 
-        .username-btn {
-            background-color: #4162ff;
-            border: 1px solid white;
-            border-radius: 10px;
-            padding: 14px 28px;
-            color: white;
-            font-weight: 600;
-            font-size: 16px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            cursor: pointer;
-            transition: 0.3s;
-            user-select: none;
-            margin-top: 6px;
-        }
+    .username-btn {
+      background-color: #4162ff;
+      border: 1px solid white;
+      border-radius: 10px;
+      padding: 14px 28px;
+      color: white;
+      font-weight: 600;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      transition: 0.3s;
+      user-select: none;
+    }
 
-        .username-btn:hover {
-            transform: scale(1.05);
-        }
+    .username-btn:hover {
+      transform: scale(1.05);
+    }
 
-        .username-btn img {
-            width: 26px;
-            height: 26px;
-            border-radius: 50%;
-        }
+    .username-btn img {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+    }
 
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            right: 0;
-            margin-top: 10px;
-            background-color: #303030;
-            border: 1px solid #555;
-            border-radius: 8px;
-            min-width: 180px;
-            z-index: 100;
-            overflow: hidden;
-            opacity: 0;
-            transition: opacity 0.25s ease, transform 0.25s ease;
-            transform: translateY(-5px);
-        }
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      right: 0;
+      margin-top: 10px;
+      background-color: #303030;
+      border: 1px solid #555;
+      border-radius: 8px;
+      min-width: 180px;
+      z-index: 100;
+      overflow: hidden;
+      opacity: 0;
+      transition: opacity 0.25s ease, transform 0.25s ease;
+      transform: translateY(-5px);
+    }
 
-        .dropdown-content.show {
-            display: block;
-            opacity: 1;
-            transform: translateY(0);
-        }
+    .dropdown-content.show {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+    }
 
-        .dropdown-content a {
-            color: white;
-            padding: 10px 14px;
-            text-decoration: none;
-            display: block;
-            transition: background 0.2s ease;
-        }
+    .dropdown-content a {
+      color: white;
+      padding: 10px 14px;
+      text-decoration: none;
+      display: block;
+      transition: background 0.2s ease;
+    }
 
-        .dropdown-content a:hover {
-            background-color: #4162ff;
-        }
+    .dropdown-content a:hover {
+      background-color: #4162ff;
+    }
 
-        /* PREMIUM SECTION */
-        .premium-container {
-            text-align: center;
-            padding: 80px 60px;
-            background-color: #202020;
-            color: white;
-        }
+    /* Main content */
+    main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      margin-bottom: 140px;
+    }
 
-        .premium-container h1 {
-            font-family: 'Archivo Black', sans-serif;
-            font-size: 70px;
-            color: #4162ff;
-            margin-bottom: 20px;
-        }
+    h1 {
+      font-size: 30px;
+      font-weight: 700;
+      color: white;
+      margin-bottom: 12px;
+    }
 
-        .premium-container p {
-            font-size: 20px;
-            color: #ccc;
-            margin-bottom: 60px;
-        }
+    h1 span {
+      color: #4162ff;
+    }
 
-        .cards {
-            display: flex;
-            justify-content: center;
-            gap: 40px;
-            flex-wrap: wrap;
-        }
+    .cards {
+      display: flex;
+      gap: 50px;
+      margin-top: 25px;
+    }
 
-        .card {
-            background-color: #292929;
-            border: 2px solid #4162ff;
-            border-radius: 20px;
-            padding: 40px 30px;
-            width: 320px;
-            text-align: center;
-            box-shadow: 0 0 20px rgba(65, 98, 255, 0.2);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
+    .card {
+      background: linear-gradient(180deg, #4162ff, #2b3b87);
+      padding: 25px 40px;
+      border-radius: 12px;
+      text-align: left;
+      width: 250px;
+      box-shadow: 0 0 30px rgba(65, 98, 255, 0.3);
+    }
 
-        .card:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 40px rgba(65, 98, 255, 0.6);
-        }
+    .card.custom {
+      background: linear-gradient(180deg, #1f2340, #2b3b87);
+    }
 
-        .card h2 {
-            color: #4162ff;
-            font-size: 28px;
-            margin-bottom: 14px;
-        }
+    .card h2 {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
 
-        .card p {
-            color: #ccc;
-            font-size: 16px;
-            margin-bottom: 20px;
-        }
+    .price {
+      font-weight: 600;
+      font-size: 14px;
+      margin-bottom: 8px;
+    }
 
-        .card button {
-            background-color: #4162ff;
-            border: none;
-            color: white;
-            font-weight: 600;
-            padding: 12px 26px;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: 0.3s;
-        }
+    .purchase-btn {
+      background: white;
+      color: black;
+      font-weight: 700;
+      border: none;
+      padding: 6px 18px;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 8px;
+    }
 
-        .card button:hover {
-            background-color: #3350d8;
-            transform: scale(1.05);
-        }
+    .purchase-btn:hover {
+      transform: scale(1.05);
+      transition: 0.2s;
+    }
 
-        /* FOOTER */
-        footer {
-            border-top: 1px solid #4162ff;
-            padding: 25px 60px;
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            color: #ccc;
-            background-color: #202020;
-        }
+    ul {
+      list-style: none;
+      margin-top: 10px;
+    }
 
-        .footer-left {
-            font-weight: 700;
-            color: #4162ff;
-            font-size: 18px;
-            display: inline-block;
-            vertical-align: middle;
-        }
+    ul li {
+      margin-bottom: 8px;
+      font-size: 14px;
+    }
 
-        .footer-center {
-            position: absolute;
-            left: 50%;
-            top: 14px;
-            transform: translateX(-50%);
-            text-align: center;
-        }
+    ul li::before {
+      content: '✔️';
+      margin-right: 6px;
+      color: #00ff73;
+    }
 
-        .footer-center .links {
-            color: #fff;
-            font-size: 14px;
-        }
+    /* Footer */
+    footer {
+      border-top: 1px solid #4162ff;
+      padding: 25px 60px;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      color: #ccc;
+      min-height: 74px;
+      background-color: #202020;
+      z-index: 10;
+    }
 
-        .footer-center .links a {
-            color: #fff;
-            text-decoration: none;
-            margin: 0 6px;
-        }
+    .footer-left {
+      font-weight: 700;
+      color: #4162ff;
+      font-size: 18px;
+      display: inline-block;
+      vertical-align: middle;
+    }
 
-        .footer-center .links a:hover {
-            text-decoration: underline;
-        }
+    .footer-center {
+      position: absolute;
+      left: 50%;
+      top: 14px;
+      transform: translateX(-50%);
+      text-align: center;
+    }
 
-        .footer-center .copyright {
-            color: #aaa;
-            font-size: 13px;
-            margin-top: 8px;
-        }
+    .footer-center .links {
+      color: #fff;
+      font-size: 14px;
+    }
 
-        .discord-small {
-            position: fixed;
-            right: 40px;
-            bottom: 80px;
-            background: #4162ff;
-            color: #fff;
-            padding: 10px 18px;
-            border-radius: 8px;
-            border: 1px solid #4162ff;
-            font-weight: 600;
-            font-size: 16px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            text-decoration: none;
-            transition: .3s;
-            z-index: 10;
-        }
+    .footer-center .links a {
+      color: #fff;
+      text-decoration: none;
+      margin: 0 6px;
+    }
 
-        .discord-small img {
-            width: 22px;
-            height: 22px;
-            filter: invert(1);
-        }
+    .footer-center .links a:hover {
+      text-decoration: underline;
+    }
 
-        .discord-small:hover {
-            background: #3350d8;
-            transform: scale(1.05);
-        }
-    </style>
+    .footer-center .copyright {
+      color: #aaa;
+      font-size: 13px;
+      margin-top: 8px;
+    }
+
+    .discord-small {
+      position: fixed;
+      right: 40px;
+      bottom: 16px;
+      background: #4162ff;
+      color: #fff;
+      padding: 10px 18px;
+      border-radius: 8px;
+      border: 1px solid #4162ff;
+      font-weight: 600;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      transition: .3s;
+      z-index: 11;
+    }
+
+    .discord-small img {
+      width: 22px;
+      height: 22px;
+      filter: invert(1);
+    }
+
+    .discord-small:hover {
+      background: #3350d8;
+      transform: scale(1.05);
+    }
+  </style>
 </head>
 
 <body>
-    <nav>
-        <div class="nav-left">
-            <img src="https://i.postimg.cc/jjncdz58/S-6.png" alt="Logo" />
-            <div class="nav-links">
-                <a href="#">Home</a>
-                <a href="#">Commands</a>
-                <a href="#">Premium</a>
-            </div>
-        </div>
+  <nav>
+    <div class="nav-left">
+      <img src="https://i.postimg.cc/jjncdz58/S-6.png" alt="Logo" />
+      <div class="nav-links">
+        <a href="#">Home</a>
+        <a href="#">Commands</a>
+        <a href="#">Premium</a>
+      </div>
+    </div>
 
-        <div class="dropdown" id="dropdown">
-            <button class="username-btn" id="userBtn">
-                <img src="Username.png" alt="User" />
-                Username
-            </button>
-            <div class="dropdown-content" id="dropdownMenu">
-                <a href="#">Profile</a>
-                <a href="#">Settings</a>
-                <a href="#">Logout</a>
-            </div>
-        </div>
-    </nav>
+    <div class="dropdown" id="dropdown">
+      <button class="username-btn" id="userBtn">
+        <img src="Username.png" alt="User" />
+        Username
+      </button>
+      <div class="dropdown-content" id="dropdownMenu">
+        <a href="#">Profile</a>
+        <a href="#">Settings</a>
+        <a href="#">Logout</a>
+      </div>
+    </div>
+  </nav>
 
-    <section class="premium-container">
-        <h1>Premium Plans</h1>
-        <p>Upgrade to unlock exclusive features and enhancements for your Status Bot experience.</p>
+  <main>
+    <h1>Elevate Your <br><span>Discord Experience ✨</span></h1>
+    <div class="cards">
+      <div class="card">
+        <h2>Premium</h2>
+        <p class="price">$4.99 - One time Payment<br>or<br>💎 Server Boost - 1 Month</p>
+        <button class="purchase-btn">Purchase</button>
+        <ul>
+          <li>Anti Nuke</li>
+          <li>Bypass role requirements</li>
+          <li>Custom Embeds</li>
+          <li>XP System & Economy</li>
+        </ul>
+      </div>
 
-        <div class="cards">
-            <div class="card">
-                <h2>Basic</h2>
-                <p>Perfect for small servers and personal use.</p>
-                <button>Subscribe</button>
-            </div>
-            <div class="card">
-                <h2>Pro</h2>
-                <p>For active communities that want more control and perks.</p>
-                <button>Subscribe</button>
-            </div>
-            <div class="card">
-                <h2>Ultimate</h2>
-                <p>Unlock every feature and dominate your Discord experience.</p>
-                <button>Subscribe</button>
-            </div>
-        </div>
-    </section>
+      <div class="card custom">
+        <h2>Custom</h2>
+        <p class="price">$9.99 - One time Payment<br>or<br>💎 Server Boost - 3 Months</p>
+        <button class="purchase-btn">Purchase</button>
+        <ul>
+          <li>Anti Nuke</li>
+          <li>Bypass role requirements</li>
+          <li>Custom Embeds</li>
+          <li>XP System & Economy</li>
+          <li>Custom bot made by developers</li>
+        </ul>
+      </div>
+    </div>
+  </main>
 
-    <footer>
-        <div class="footer-left">Status Bot</div>
-        <div class="footer-center">
-            <div class="links">
-                <a href="#">Terms</a> |
-                <a href="#">Support</a> |
-                <a href="#">Privacy Policy</a>
-            </div>
-            <div class="copyright">© 2025 Status Bot. All rights reserved</div>
-        </div>
-    </footer>
+  <footer>
+    <div class="footer-left">Status Bot</div>
+    <div class="footer-center">
+      <div class="links">
+        <a href="#">Terms</a> |
+        <a href="#">Support</a> |
+        <a href="#">Privacy Policy</a>
+      </div>
+      <div class="copyright">© 2025 Status Bot. All rights reserved</div>
+    </div>
+  </footer>
 
-    <a class="discord-small" href="https://discord.gg/Kd2MckVxED" target="_blank">
-        <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/discord.svg" alt="Discord">
-        Discord
-    </a>
+  <a class="discord-small" href="https://discord.gg/Kd2MckVxED" target="_blank">
+    <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/discord.svg" alt="Discord">
+    Discord
+  </a>
 
-    <script>
-        const dropdown = document.getElementById('dropdown');
-        const userBtn = document.getElementById('userBtn');
-        const dropdownMenu = document.getElementById('dropdownMenu');
-        let dropdownTimeout;
+  <script>
+    const dropdown = document.getElementById('dropdown');
+    const userBtn = document.getElementById('userBtn');
+    const dropdownMenu = document.getElementById('dropdownMenu');
+    let dropdownTimeout;
 
-        const openDropdown = () => {
-            clearTimeout(dropdownTimeout);
-            dropdownMenu.classList.add('show');
-        };
+    const openDropdown = () => {
+      clearTimeout(dropdownTimeout);
+      dropdownMenu.classList.add('show');
+    };
 
-        const closeDropdown = () => {
-            dropdownTimeout = setTimeout(() => {
-                dropdownMenu.classList.remove('show');
-            }, 200);
-        };
+    const closeDropdown = () => {
+      dropdownTimeout = setTimeout(() => {
+        dropdownMenu.classList.remove('show');
+      }, 200);
+    };
 
-        userBtn.addEventListener('mouseenter', openDropdown);
-        userBtn.addEventListener('mouseleave', closeDropdown);
-        dropdownMenu.addEventListener('mouseenter', openDropdown);
-        dropdownMenu.addEventListener('mouseleave', closeDropdown);
-    </script>
+    userBtn.addEventListener('mouseenter', openDropdown);
+    userBtn.addEventListener('mouseleave', closeDropdown);
+    dropdownMenu.addEventListener('mouseenter', openDropdown);
+    dropdownMenu.addEventListener('mouseleave', closeDropdown);
+  </script>
 </body>
-
 </html>
