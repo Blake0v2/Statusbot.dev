@@ -272,8 +272,29 @@
         Discord
     </a>
 
+    <script>
+        const dropdown = document.getElementById('dropdown');
+        const userBtn = document.getElementById('userBtn');
+        const dropdownMenu = document.getElementById('dropdownMenu');
+        let dropdownTimeout;
 
+        const openDropdown = () => {
+            clearTimeout(dropdownTimeout);
+            dropdownMenu.classList.add('show');
+        };
+
+        const closeDropdown = () => {
+            dropdownTimeout = setTimeout(() => {
+                dropdownMenu.classList.remove('show');
+            }, 200);
+        };
+
+        userBtn.addEventListener('mouseenter', openDropdown);
+        userBtn.addEventListener('mouseleave', closeDropdown);
+        dropdownMenu.addEventListener('mouseenter', openDropdown);
+        dropdownMenu.addEventListener('mouseleave', closeDropdown);
+    </script>
 </body>
-
 </html>
+
 
