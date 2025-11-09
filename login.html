@@ -98,6 +98,40 @@
             transform: scale(1.05)
         }
 
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            right: 0;
+            margin-top: 10px;
+            background-color: #303030;
+            border: 1px solid #555;
+            border-radius: 8px;
+            min-width: 180px;
+            z-index: 100;
+            overflow: hidden;
+            opacity: 0;
+            transition: opacity 0.25s ease, transform 0.25s ease;
+            transform: translateY(-5px);
+        }
+
+        .dropdown-content.show {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .dropdown-content a {
+            color: white;
+            padding: 10px 14px;
+            text-decoration: none;
+            display: block;
+            transition: background 0.2s ease;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #4162ff;
+        }
+
         .login-container {
             display: flex;
             justify-content: center;
@@ -296,5 +330,6 @@
     </script>
 </body>
 </html>
+
 
 
