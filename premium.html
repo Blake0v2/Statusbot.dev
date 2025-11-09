@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Status Bot Premium</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background: #1c1c1c;
+            color: #fff;
+        }
+
+        /* Navbar */
+        nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 60px;
+            background: transparent;
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .nav-left img {
+            width: 50px;
+            height: 50px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            margin: 0 10px;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: #4162ff;
+            border-bottom: 3px solid #4162ff;
+            padding-bottom: 3px;
+        }
+
+        .nav-right button {
+            background: #4162ff;
+            border: 1px solid #4162ff;
+            color: #fff;
+            font-weight: 600;
+            border-radius: 8px;
+            padding: 6px 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        .nav-right button img {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin-top: 100px;
+        }
+
+        .header h1 {
+            font-size: 36px;
+            font-weight: 700;
+        }
+
+        .header h1 span {
+            color: #4162ff;
+        }
+
+        .header img {
+            width: 30px;
+            vertical-align: middle;
+            margin-left: 6px;
+        }
+
+        /* Cards Section */
+        .plans {
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            margin-top: 60px;
+        }
+
+        .card {
+            background: #4162ff;
+            border-radius: 12px;
+            padding: 25px 40px;
+            width: 280px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.4);
+        }
+
+        .card.custom {
+            background: radial-gradient(circle at top, #4162ff, #1c1c1c);
+        }
+
+        .card h2 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            margin: 4px 0;
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+        .price {
+            margin: 10px 0;
+        }
+
+        .diamond {
+            width: 16px;
+            vertical-align: middle;
+            margin-right: 6px;
+        }
+
+        .card button {
+            background: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 8px 20px;
+            font-weight: 700;
+            cursor: pointer;
+            margin: 15px 0;
+        }
+
+        .card ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .card ul li {
+            font-size: 15px;
+            margin: 8px 0;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .card ul li::before {
+            content: '✔';
+            color: #00ff66;
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid #4162ff;
+            padding: 25px 60px;
+            position: relative;
+            color: #ccc;
+            min-height: 74px;
+            margin-top: 100px;
+        }
+
+        .footer-left {
+            font-weight: 700;
+            color: #4162ff;
+            font-size: 18px;
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .footer-center {
+            position: absolute;
+            left: 50%;
+            top: 14px;
+            transform: translateX(-50%);
+            text-align: center;
+        }
+
+        .footer-center .links {
+            color: #fff;
+            font-size: 14px;
+        }
+
+        .footer-center .links a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 6px;
+        }
+
+        .footer-center .links a:hover {
+            text-decoration: underline;
+        }
+
+        .footer-center .copyright {
+            color: #aaa;
+            font-size: 13px;
+            margin-top: 8px;
+        }
+
+        .discord-small {
+            position: fixed;
+            right: 40px;
+            bottom: 16px;
+            background: #4162ff;
+            color: #fff;
+            padding: 10px 18px;
+            border-radius: 8px;
+            border: 1px solid #4162ff;
+            font-weight: 600;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            transition: .3s;
+            z-index: 10;
+        }
+
+        .discord-small img {
+            width: 22px;
+            height: 22px;
+            filter: invert(1);
+        }
+
+        .discord-small:hover {
+            background: #3350d8;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="nav-left">
+            <img src="https://i.postimg.cc/jjncdz58/S-6.png" alt="Logo">
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="commands.html">Commands</a>
+                <a href="premium.html" class="active">Premium</a>
+            </div>
+        </div>
+        <div class="nav-right">
+            <button><img src="https://cdn-icons-png.flaticon.com/512/147/147144.png" alt=""> Username</button>
+        </div>
+    </nav>
+
+    <div class="header">
+        <h1>Elevate Your <br><span>Discord Experience</span>
+            <img src="https://i.postimg.cc/bwBpkjR9/Adobe-Express-file-5.png" alt="Stars">
+        </h1>
+    </div>
+
+    <div class="plans">
+        <div class="card">
+            <h2>Premium</h2>
+            <div class="price">
+                <p>$4.99 - One time Payment</p>
+                <p>or</p>
+                <p><img class="diamond" src="https://i.postimg.cc/hP4BYGyw/ddddd.png">Server Boost - 1 Month</p>
+            </div>
+            <button>Purchase</button>
+            <h3>Unlock:</h3>
+            <ul>
+                <li>Anti Nuke</li>
+                <li>Bypass role requirements</li>
+                <li>Custom Embeds</li>
+                <li>XP System & Economy</li>
+            </ul>
+        </div>
+
+        <div class="card custom">
+            <h2>Custom</h2>
+            <div class="price">
+                <p>$9.99 - One time Payment</p>
+                <p>or</p>
+                <p><img class="diamond" src="https://i.postimg.cc/hP4BYGyw/ddddd.png">Server Boost - 3 Months</p>
+            </div>
+            <button>Purchase</button>
+            <h3>Unlock:</h3>
+            <ul>
+                <li>Anti Nuke</li>
+                <li>Bypass role requirements</li>
+                <li>Custom Embeds</li>
+                <li>XP System & Economy</li>
+                <li>Custom bot made by the developers</li>
+            </ul>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-left">Status Bot</div>
+        <div class="footer-center">
+            <div class="links">
+                <a href="#">Terms</a> |
+                <a href="#">Support</a> |
+                <a href="#">Privacy Policy</a>
+            </div>
+            <div class="copyright">© 2025 Status Bot. All rights reserved</div>
+        </div>
+    </footer>
+
+    <a class="discord-small" href="https://discord.gg/Kd2MckVxED" target="_blank">
+        <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/discord.svg" alt="Discord">
+        Discord
+    </a>
+
+</body>
+</html>
