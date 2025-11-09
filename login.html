@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Status Bot - Login</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background-color: #202020;
+      color: white;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border: 1.5px solid #4162ff;
+      overflow: hidden;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 30px 60px;
+    }
+
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 35px;
+    }
+
+    .nav-left img {
+      height: 45px;
+      width: 45px;
+      border-radius: 50%;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 35px;
+    }
+
+    .nav-links a {
+      position: relative;
+      text-decoration: none;
+      color: white;
+      font-weight: 500;
+      font-size: 20px;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -5px;
+      width: 0%;
+      height: 2px;
+      background-color: #4162ff;
+      transition: width 0.3s ease;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .username-btn {
+      background-color: #4162ff;
+      border: 1px solid white;
+      border-radius: 10px;
+      padding: 10px 20px;
+      color: white;
+      font-weight: 600;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .username-btn img {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+    }
+
+    .username-btn:hover {
+      transform: scale(1.05);
+    }
+
+    .login-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-grow: 1;
+    }
+
+    .login-box {
+      background-color: #4162ff;
+      padding: 50px 80px;
+      border-radius: 10px;
+      text-align: center;
+      width: 480px;
+    }
+
+    .login-box h1 {
+      font-weight: 700;
+      margin-bottom: 20px;
+      font-size: 28px;
+    }
+
+    .login-box p {
+      font-weight: 600;
+      margin-bottom: 40px;
+      font-size: 16px;
+    }
+
+    .login-btn {
+      background: transparent;
+      border: 2px solid white;
+      color: white;
+      font-size: 16px;
+      padding: 12px 28px;
+      border-radius: 10px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.3s ease;
+    }
+
+    .login-btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+      transform: scale(1.05);
+    }
+
+    .login-btn img {
+      width: 20px;
+      height: 20px;
+      filter: invert(1);
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      border-top: 1px solid #4162ff;
+      font-size: 14px;
+      color: #ccc;
+      position: relative;
+    }
+
+    footer a {
+      color: white;
+      text-decoration: none;
+      margin: 0 6px;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    .discord-small {
+      position: absolute;
+      right: 40px;
+      bottom: 25px;
+      background-color: #4162ff;
+      color: white;
+      padding: 10px 18px;
+      border-radius: 8px;
+      border: 1px solid #4162ff;
+      font-weight: 600;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      transition: 0.3s ease;
+    }
+
+    .discord-small:hover {
+      background-color: #3350d8;
+      transform: scale(1.05);
+    }
+
+    .discord-small img {
+      width: 22px;
+      height: 22px;
+      filter: invert(1);
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="nav-left">
+      <img src="https://i.postimg.cc/jjncdz58/S-6.png" alt="Logo" />
+      <div class="nav-links">
+        <a href="#">Home</a>
+        <a href="#">Commands</a>
+        <a href="#">Premium</a>
+      </div>
+    </div>
+
+    <button class="username-btn">
+      <img src="Username.png" alt="User" />
+      Username
+    </button>
+  </nav>
+
+  <div class="login-container">
+    <div class="login-box">
+      <h1>Welcome to Status Bot</h1>
+      <p>Please log in with your discord account to access the dashboard!</p>
+      <a class="login-btn" href="https://discord.com/oauth2/authorize?client_id=1436123870158520411&response_type=code&redirect_uri=https%3A%2F%2Fstatusbot.dev%2F&scope=identify+guilds+presences.read+guilds.join+presences.write+activities.write+guilds.members.read+guilds.channels.read">
+        <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/discord.svg" alt="Discord Logo" />
+        Log in with Discord
+      </a>
+    </div>
+  </div>
+
+  <footer>
+    <div>
+      <a href="#">Terms</a> | 
+      <a href="#">Support</a> | 
+      <a href="#">Privacy Policy</a>
+    </div>
+    <p>© 2025 Status Bot. All rights reserved</p>
+
+    <a href="https://discord.gg/Kd2MckVxED" target="_blank" class="discord-small">
+      <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/discord.svg" alt="Discord Icon" />
+      Discord
+    </a>
+  </footer>
+</body>
+</html>

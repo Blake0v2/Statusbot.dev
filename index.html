@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Status Bot</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background-color: #202020;
+      color: white;
+      overflow: hidden;
+      border: 1.5px solid #4162ff;
+      box-shadow: 0 0 25px rgba(65, 98, 255, 0.3);
+      height: 100vh;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 32px 60px;
+    }
+
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 35px;
+    }
+
+    .nav-left img {
+      height: 45px;
+      width: 45px;
+      border-radius: 50%;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 35px;
+    }
+
+    .nav-links a {
+      position: relative;
+      text-decoration: none;
+      color: white;
+      font-weight: 500;
+      font-size: 20px;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -5px;
+      width: 0%;
+      height: 2px;
+      background-color: #4162ff;
+      transition: width 0.3s ease;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+
+    .username-btn {
+    background-color: #4162ff;
+    border: 1px solid white;
+    border-radius: 10px;
+    padding: 14px 28px;
+    color: white;
+    font-weight: 600;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    transition: 0.3s;
+    user-select: none;
+    margin-top: 6px;
+    }
+
+    .username-btn:hover {
+      transform: scale(1.05);
+    }
+
+    .username-btn img {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      right: 0;
+      margin-top: 10px;
+      background-color: #303030;
+      border: 1px solid #555;
+      border-radius: 8px;
+      min-width: 180px;
+      z-index: 100;
+      overflow: hidden;
+      opacity: 0;
+      transition: opacity 0.25s ease, transform 0.25s ease;
+      transform: translateY(-5px);
+    }
+
+    .dropdown-content.show {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .dropdown-content a {
+      color: white;
+      padding: 10px 14px;
+      text-decoration: none;
+      display: block;
+      transition: background 0.2s ease;
+    }
+
+    .dropdown-content a:hover {
+      background-color: #4162ff;
+    }
+
+    .main {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 100px;
+    }
+
+    .text-section {
+      flex: 1;
+      max-width: 700px;
+      margin-left: 44px;
+    }
+
+    .text-section h1 {
+      font-family: 'Archivo Black', sans-serif;
+      font-size: 80px;
+      color: #4162ff;
+      font-weight: 900;
+      margin-bottom: 20px;
+      white-space: nowrap;
+      border-right: 3px solid #4162ff;
+      overflow: hidden;
+      width: 0;
+      animation: typing 6s steps(9, end) infinite;
+    }
+
+    @keyframes typing {
+      0% { width: 0; }
+      40% { width: 9ch; }
+      70% { width: 9ch; }
+      100% { width: 0; }
+    }
+
+    .text-section p {
+      font-size: 22px;
+      font-weight: 500;
+      margin-left: 60px;
+      margin-top: 18px;
+      line-height: 1.9;
+      letter-spacing: 0.4px;
+      max-width: 1300px;
+      color: #ddd;
+    }
+
+    .discord-btn {
+      background-color: #4162ff;
+      border: 1px solid white;
+      border-radius: 10px;
+      padding: 12px 26px;
+      color: white;
+      font-weight: 600;
+      font-size: 18px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      transition: 0.3s;
+      margin-top: 28px;
+      margin-left: 60px;
+      text-decoration: none;
+    }
+
+    .discord-btn:hover {
+      transform: scale(1.05);
+      background-color: #3350d8;
+    }
+
+    .discord-btn img {
+      width: 24px;
+      height: 24px;
+      filter: invert(1);
+    }
+
+    .image-section {
+      flex: 1;
+      display: flex;
+      justify-content: flex-end;
+      margin-right: 120px;
+    }
+
+    .image-section img {
+      width: 580px;
+      border-radius: 50%;
+      background: radial-gradient(circle at center, #4162ff, #1e2c80);
+      padding: 45px;
+      transition: 0.4s ease;
+      box-shadow: 0 0 25px rgba(65, 98, 255, 0.4);
+      animation: pulseGlow 4s ease-in-out infinite;
+    }
+
+    .image-section img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 45px rgba(65, 98, 255, 0.9);
+    }
+
+    @keyframes pulseGlow {
+      0%, 100% { box-shadow: 0 0 25px rgba(65, 98, 255, 0.4); }
+      50% { box-shadow: 0 0 50px rgba(65, 98, 255, 0.8); }
+    }
+
+    .bottom-wave {
+      position: absolute;
+      bottom: -130px;
+      left: 0;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="nav-left">
+      <img src="https://i.postimg.cc/jjncdz58/S-6.png" alt="Logo" />
+      <div class="nav-links">
+        <a href="#">Home</a>
+        <a href="#">Commands</a>
+        <a href="#">Premium</a>
+      </div>
+    </div>
+
+    <div class="dropdown" id="dropdown">
+      <button class="username-btn" id="userBtn">
+        <img src="Username.png" alt="User" />
+        Username
+      </button>
+      <div class="dropdown-content" id="dropdownMenu">
+        <a href="#">Profile</a>
+        <a href="#">Settings</a>
+        <a href="#">Logout</a>
+      </div>
+    </div>
+  </nav>
+
+  <section class="main">
+    <div class="text-section">
+      <h1>Status Bot</h1>
+      <p>
+        Status Bot is an intelligent bot with key features like: Moderation, Giveaways,
+        & Status updates for your bot or user!
+      </p>
+
+      <a class="discord-btn" href="https://discord.gg/Kd2MckVxED" target="_blank">
+        <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/discord.svg" alt="Discord Logo">
+        Discord
+      </a>
+    </div>
+
+    <div class="image-section">
+      <img src="https://i.postimg.cc/jjncdz58/S-6.png" alt="Logo" />
+    </div>
+  </section>
+
+  <svg class="bottom-wave" viewBox="0 0 1440 320">
+    <path fill="#4162ff" fill-opacity="1"
+      d="M0,288L48,272C96,256,192,224,288,213.3C384,203,480,213,576,213.3C672,213,768,203,864,181.3C960,160,1056,128,1152,112C1248,96,1344,96,1392,96L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z">
+    </path>
+  </svg>
+
+  <script>
+    const dropdown = document.getElementById('dropdown');
+    const userBtn = document.getElementById('userBtn');
+    const dropdownMenu = document.getElementById('dropdownMenu');
+    let dropdownTimeout;
+
+    const openDropdown = () => {
+      clearTimeout(dropdownTimeout);
+      dropdownMenu.classList.add('show');
+    };
+
+    const closeDropdown = () => {
+      dropdownTimeout = setTimeout(() => {
+        dropdownMenu.classList.remove('show');
+      }, 200);
+    };
+
+    userBtn.addEventListener('mouseenter', openDropdown);
+    userBtn.addEventListener('mouseleave', closeDropdown);
+    dropdownMenu.addEventListener('mouseenter', openDropdown);
+    dropdownMenu.addEventListener('mouseleave', closeDropdown);
+  </script>
+</body>
+</html>
